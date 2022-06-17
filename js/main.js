@@ -1,6 +1,3 @@
-const PHOTO_COUNT = 25;
-let id = 0;
-
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -26,6 +23,12 @@ const DESCRIPTIONS = [
   'Описание пять'
 ];
 
+const PHOTO_COUNT = 25;
+const MAX_COMMENT_ID = 10000;
+const LIKES_RANGE = [15, 200];
+const AVATARS_NUMBER = 6;
+let id = 0;
+
 //* Функция, возвращающая случайное целое число из переданного диапазона включительно.
 const getRandomInt = (min, max) => {
   min = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
@@ -42,8 +45,8 @@ const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.le
 
 // Функция создает комментарии
 const createComments = () => ({
-  id: getRandomInt(1, 10000),
-  avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
+  id: getRandomInt(1, MAX_COMMENT_ID),
+  avatar: `img/avatar-${getRandomInt(1, AVATARS_NUMBER)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES)
 });
@@ -53,7 +56,7 @@ const createPhotoDescriptions = () => ({
   id: ++id,
   url: `photos/${id}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomInt(15, 200),
+  likes: getRandomInt(LIKES_RANGE[0], LIKES_RANGE[1]),
   comments: createComments()
 });
 
