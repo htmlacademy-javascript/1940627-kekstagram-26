@@ -1,4 +1,4 @@
-//* Функция, возвращающая случайное целое число из переданного диапазона включительно.
+//* Функция возвращающая случайное целое число из переданного диапазона включительно.
 const getRandomInt = (min, max) => {
   min = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   max = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
@@ -9,7 +9,10 @@ const getRandomInt = (min, max) => {
 const checkCommentLength = (comment, maxLength) => comment.length <= maxLength;
 checkCommentLength('Hello world', 11);
 
-//* Функция, возвращающая случайный элемент из массива.
+//* Функция возвращающая случайный элемент из массива.
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length -1)];
 
-export {getRandomInt, getRandomArrayElement};
+//Функция нажатия на Esc.
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInt, getRandomArrayElement,isEscapeKey};
