@@ -7,14 +7,14 @@ const thumbnailTemplate = document.querySelector('#picture').content.querySelect
 const thumbnails = photoDescriptions();
 const thumbnailsFragment = document.createDocumentFragment();
 
-thumbnails.forEach((photo) => {
+thumbnails.forEach(({url, likes, comments, description}) => {
   const thumbnail = thumbnailTemplate.cloneNode(true);
-  thumbnail.querySelector('.picture__img').src = photo.url;
-  thumbnail.querySelector('.picture__likes').textContent = photo.likes;
-  thumbnail.querySelector('.picture__comments').textContent = photo.comments.length;
+  thumbnail.querySelector('.picture__img').src = url;
+  thumbnail.querySelector('.picture__likes').textContent = likes;
+  thumbnail.querySelector('.picture__comments').textContent = comments.length;
   thumbnailsFragment.appendChild(thumbnail);
   thumbnail.addEventListener('click', () => {
-    createFullSizePicture(photo);
+    createFullSizePicture({url, likes, comments, description});
   });
 });
 

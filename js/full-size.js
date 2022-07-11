@@ -36,16 +36,16 @@ function bigPictureClose () {
 }
 
 // Функция генерирует полноразмерное фото с информацией
-const createFullSizePicture = (photo) => {
+const createFullSizePicture = ({url, likes, comments, description}) => {
   bigPictureOpen();
 
-  bigPictureImageElement.src = photo.url;
-  likesCountElement.textContent = photo.likes;
-  commentsCountElement.textContent = photo.comments.length;
-  bigPictureDescriptionElement.textContent = photo.description;
+  bigPictureImageElement.src = url;
+  likesCountElement.textContent = likes;
+  commentsCountElement.textContent = String(comments.length);
+  bigPictureDescriptionElement.textContent = description;
   socialCommentsContainer.innerHTML = '';
 
-  photo.comments.forEach((comment) => {
+  comments.forEach((comment) => {
     const socialCommentElementTemplate = socialCommentElement.cloneNode(true);
     const socialCommentImage = socialCommentElementTemplate.querySelector('.social__picture');
     const socialCommentText = socialCommentElementTemplate.querySelector('.social__text');

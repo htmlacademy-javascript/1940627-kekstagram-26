@@ -7,7 +7,6 @@ const getRandomInt = (min, max) => {
 
 //Функция для проверки максимальной длины строки.
 const checkCommentLength = (comment, maxLength) => comment.length <= maxLength;
-checkCommentLength('Hello world', 11);
 
 //* Функция возвращающая случайный элемент из массива.
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length -1)];
@@ -15,4 +14,7 @@ const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.le
 //Функция нажатия на Esc.
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomInt, getRandomArrayElement,isEscapeKey};
+//Проверка на уникальность элемента
+const checkUniqueElement = (value) => new Set(value).size === value.length;
+
+export {getRandomInt, getRandomArrayElement,isEscapeKey, checkCommentLength, checkUniqueElement};
