@@ -29,7 +29,7 @@ const PHOTO_COUNT = 25;
 const MAX_COMMENT_ID = 10000;
 const LIKES_RANGE = [15, 200];
 const AVATARS_NUMBER = 6;
-const COMMENTS_RANGE = [1, 6];
+const COMMENTS_RANGE = [1, 15];
 let id = 0;
 
 // Функция создает комментарии

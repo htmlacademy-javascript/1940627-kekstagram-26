@@ -77,5 +77,3 @@ uploadForm.addEventListener('submit', (evt) => {
     uploadForm.submit();
   }
 });
-
-
