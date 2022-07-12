@@ -3,7 +3,6 @@ import {isEscapeKey} from './util.js';
 const bigPictureElement = document.querySelector('.big-picture');
 const bigPictureImageElement = bigPictureElement.querySelector('.big-picture__img img');
 const likesCountElement = bigPictureElement.querySelector('.likes-count');
-const commentsCountElement = bigPictureElement.querySelector('.comments-count');
 const socialCommentsCountElement = bigPictureElement.querySelector('.social__comment-count');
 const socialCommentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
 const body = document.querySelector('body');
@@ -11,6 +10,8 @@ const socialCommentsContainer = bigPictureElement.querySelector('.social__commen
 const socialCommentElement = bigPictureElement.querySelector('.social__comment');
 const bigPictureDescriptionElement = bigPictureElement.querySelector('.social__caption');
 const bigPictureCloseElement = bigPictureElement.querySelector('#picture-cancel');
+const commentsFragment = document.createDocumentFragment();
+const maxCommentsValue = 5;
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -41,26 +42,41 @@ const createFullSizePicture = ({url, likes, comments, description}) => {
 
   bigPictureImageElement.src = url;
   likesCountElement.textContent = likes;
-  commentsCountElement.textContent = String(comments.length);
   bigPictureDescriptionElement.textContent = description;
-  socialCommentsContainer.innerHTML = '';
 
-  comments.forEach((comment) => {
-    const socialCommentElementTemplate = socialCommentElement.cloneNode(true);
-    const socialCommentImage = socialCommentElementTemplate.querySelector('.social__picture');
-    const socialCommentText = socialCommentElementTemplate.querySelector('.social__text');
+  let commentsValue = 0;
 
-    socialCommentImage.src = comment.avatar;
-    socialCommentImage.alt = comment.name;
-    socialCommentText.textContent = comment.message;
+  //Функция отрисовки комментариев
+  const showComment = () => {
+    comments.slice(0, commentsValue += maxCommentsValue).forEach(({avatar, name, message}) => {
+      const socialCommentElementTemplate = socialCommentElement.cloneNode(true);
+      const socialCommentImage = socialCommentElementTemplate.querySelector('.social__picture');
+      const socialCommentText = socialCommentElementTemplate.querySelector('.social__text');
 
-    socialCommentsContainer.appendChild(socialCommentElementTemplate);
-  });
+      socialCommentImage.src = avatar;
+      socialCommentImage.alt = name;
+      socialCommentText.textContent = message;
+
+      commentsFragment.append(socialCommentElementTemplate);
+    });
+
+    socialCommentsContainer.innerHTML = '';
+    socialCommentsContainer.append(commentsFragment);
+
+    //Проверка на условие показа кнопки "Загрузить еще"
+    if (comments.length <= commentsValue) {
+      socialCommentsCountElement.textContent = `${comments.length} из ${comments.length} комментариев`;
+      socialCommentsLoaderElement.classList.add('hidden');
+    } else {
+      socialCommentsCountElement.textContent = `${commentsValue} из ${comments.length} комментариев`;
+      socialCommentsLoaderElement.classList.remove('hidden');
+    }
+  };
+  //Выводит первые 5 комментариев
+  showComment();
 
   bigPictureCloseElement.addEventListener('click', bigPictureClose);
-
-  socialCommentsCountElement.classList.add('hidden');
-  socialCommentsLoaderElement.classList.add('hidden');
+  socialCommentsLoaderElement.addEventListener('click', () => showComment());
 };
 
 export {createFullSizePicture};
