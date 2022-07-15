@@ -1,4 +1,6 @@
 import {isEscapeKey, checkCommentLength, checkUniqueElement} from './util.js';
+import {clearScaleValue} from './photo-editor.js';
+
 
 const uploadContainer = document.querySelector('.img-upload');
 const uploadForm = uploadContainer.querySelector('.img-upload__form');
@@ -40,10 +42,12 @@ function overlayClose () {
   uploadInput.value = '';
   uploadHashtag.value = '';
   uploadComment.value = '';
+  // Сброс масштаба фото
+  clearScaleValue();
 }
 
 uploadInput.addEventListener('change', overlayOpen);
-uploadCancelButton.addEventListener('click',overlayClose);
+uploadCancelButton.addEventListener('click', overlayClose);
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
