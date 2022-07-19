@@ -112,6 +112,13 @@ getScaleValue(scaleValue);
 photoScaleContainer.addEventListener('click', onScaleButtonClick);
 
 
+//Функция очистки стилей
+const resetEffect = () => {
+  photoInputElement.style.filter= '';
+  photoInputElement.className = '';
+  effectSliderElement.classList.add('hidden');
+};
+
 //Функция управления графическими фильтрами
 const getPhotoEffect = (evt) => {
   const currentFilter = evt.target.value;
@@ -123,20 +130,18 @@ const getPhotoEffect = (evt) => {
   }
   //Скрытие слайдера и очистка стилей у оригинала фото
   if (currentFilter === 'none') {
-    photoInputElement.style.filter= '';
-    photoInputElement.className = '';
-    effectSliderElement.classList.add('hidden');
+    resetEffect();
+  } else {
+    noUiSlider.create(effectSliderElement, EFFECTS[currentFilter]);
+    photoInputElement.className = `effects__preview--${currentFilter}`;
+
+    effectSliderElement.noUiSlider.on('update', (values) => {
+      photoInputElement.style.filter = `${EFFECTS[currentFilter].filter}(${values}${EFFECTS[currentFilter].unit})`;
+      effectValueElement.value = parseFloat(values);
+    });
   }
-
-  noUiSlider.create(effectSliderElement, EFFECTS[currentFilter]);
-  photoInputElement.className = `effects__preview--${currentFilter}`;
-
-  effectSliderElement.noUiSlider.on('update', (values) => {
-    photoInputElement.style.filter = `${EFFECTS[currentFilter].filter}(${values}${EFFECTS[currentFilter].unit})`;
-    effectValueElement.value = parseFloat(values);
-  });
 };
 
 effectListElement.addEventListener('change', getPhotoEffect);
 
-export {clearScaleValue};
+export {clearScaleValue, resetEffect};
