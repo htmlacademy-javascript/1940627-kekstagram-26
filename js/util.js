@@ -40,4 +40,12 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRandomInt, getRandomArrayElement,isEscapeKey, checkCommentLength, checkUniqueElement, showAlert};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRandomInt, getRandomArrayElement,isEscapeKey, checkCommentLength, checkUniqueElement, showAlert, debounce};
