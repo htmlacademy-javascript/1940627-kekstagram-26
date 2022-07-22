@@ -28,6 +28,7 @@ const setFilters = (thumbnails, createThumbnails) => {
   });
   randomFilterButton.addEventListener('click', (evt) => {
     createThumbnails(thumbnails
+      .slice()
       .sort(shuffleThumbnails)
       .slice(0, POST_FILTER_NUMBER));
     setActiveFilter(evt.target);
