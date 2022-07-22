@@ -5,6 +5,7 @@ import './upload-form.js';
 import './photo-editor.js';
 import './upload-messages.js';
 import './sorting-filters.js';
+import './upload-image.js';
 import {createThumbnails} from './thumbnails.js';
 import {setUserFormSubmit} from './upload-form.js';
 import {overlayClose} from './upload-form.js';
