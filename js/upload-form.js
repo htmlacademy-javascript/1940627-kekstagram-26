@@ -12,9 +12,9 @@ const uploadCancelButton = uploadContainer.querySelector('#upload-cancel');
 const uploadHashtag = uploadContainer.querySelector('.text__hashtags');
 const uploadComment = uploadContainer.querySelector('.text__description');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
-const maxCommentLength = 140;
-const maxHashtagsLength = 5;
-const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const MAX_COMMENT_LENGTH = 140;
+const MAX_HASHTAGS_LENGTH = 5;
+const HASHTAGS_RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 //Функция проверки нажатия esc
 const onPopupEscKeydown = (evt) => {
@@ -70,21 +70,21 @@ const pristine = new Pristine(uploadForm, {
 const splitHashtags = (value) => value.toLowerCase().split(' ');
 
 // Проверка на количество хэш-тегов
-const checkHashtagsLength = (value) => splitHashtags(value).length <= maxHashtagsLength;
+const checkHashtagsLength = (value) => splitHashtags(value).length <= MAX_HASHTAGS_LENGTH;
 
 // Проверка на правильность символов и их длину
-const validateHashtag = (value) => splitHashtags(value).every((item) => re.test(item)) || value === '';
+const validateHashtag = (value) => splitHashtags(value).every((item) => HASHTAGS_RE.test(item)) || value === '';
 
 //Проверка на уникальность
 const checkUniqueHashtags = (value) => checkUniqueElement(splitHashtags(value));
 
 //Проверка длины комментария
-const validateUploadComment = (value) => checkCommentLength(value, maxCommentLength);
+const validateUploadComment = (value) => checkCommentLength(value, MAX_COMMENT_LENGTH);
 
-pristine.addValidator(uploadHashtag, checkHashtagsLength, `Нельзя указать больше ${maxHashtagsLength} хэш-тегов`);
+pristine.addValidator(uploadHashtag, checkHashtagsLength, `Нельзя указать больше ${MAX_HASHTAGS_LENGTH} хэш-тегов`);
 pristine.addValidator(uploadHashtag, validateHashtag, 'Хэш-тег начинается с символа #, строка должна состоять из букв и чисел, максимальная длина 20 символов');
 pristine.addValidator(uploadHashtag, checkUniqueHashtags, 'Хэш-теги не должны повторяться');
-pristine.addValidator(uploadComment, validateUploadComment, `Длина комментария не может составлять больше ${maxCommentLength} символов!`);
+pristine.addValidator(uploadComment, validateUploadComment, `Длина комментария не может составлять больше ${MAX_COMMENT_LENGTH} символов!`);
 
 // Блокировка кнопки при отправке
 const blockSubmitButton = () => {

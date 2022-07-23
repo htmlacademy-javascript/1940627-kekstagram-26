@@ -30,7 +30,7 @@ const MAX_COMMENT_ID = 10000;
 const LIKES_RANGE = [15, 200];
 const AVATARS_NUMBER = 6;
 const COMMENTS_RANGE = [1, 15];
-let id = 0;
+let ID = 0;
 
 // Функция создает комментарии
 const createComments = () => ({
@@ -43,8 +43,8 @@ const createComments = () => ({
 
 // Функция создает описание фотографии
 const createPhotoDescriptions = () => ({
-  id: ++id,
-  url: `photos/${id}.jpg`,
+  id: ++ID,
+  url: `photos/${ID}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInt(LIKES_RANGE[0], LIKES_RANGE[1]),
   comments: Array.from({length: getRandomInt(COMMENTS_RANGE[0], COMMENTS_RANGE[1])}, createComments)

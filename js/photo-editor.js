@@ -66,9 +66,9 @@ const EFFECTS = {
   }
 };
 
-const minScaleRange = 25;
-const maxScaleRange = 100;
-const scaleStep = 25;
+const MIN_SCALE_RANGE = 25;
+const MAX_SCALE_RANGE = 100;
+const SCALE_STEP = 25;
 
 const photoScaleContainer = document.querySelector('.img-upload__scale');
 const scaleInputElement = photoScaleContainer.querySelector('.scale__control--value');
@@ -79,7 +79,7 @@ const effectSliderElement = effectLevelElement.querySelector('.effect-level__sli
 const effectListElement = document.querySelector('.effects__list');
 
 // Управление масштабом
-let scaleValue = maxScaleRange;
+let scaleValue = MAX_SCALE_RANGE;
 
 //Функция вносит значения масштаба
 const getScaleValue = (value) => {
@@ -89,20 +89,20 @@ const getScaleValue = (value) => {
 
 //Функция очищает значения масштаба
 const clearScaleValue = () => {
-  scaleValue = maxScaleRange;
-  getScaleValue(maxScaleRange);
+  scaleValue = MAX_SCALE_RANGE;
+  getScaleValue(MAX_SCALE_RANGE);
   photoInputElement.style.transform = `scale(${scaleValue * 0.01})`;
 };
 
 // Функция меняет значения масштаба при нажатии на кнопки
 const onScaleButtonClick = (evt) => {
-  if (evt.target.matches('.scale__control--smaller') && scaleValue > minScaleRange) {
-    scaleValue -= scaleStep;
+  if (evt.target.matches('.scale__control--smaller') && scaleValue > MIN_SCALE_RANGE) {
+    scaleValue -= SCALE_STEP;
     return getScaleValue(scaleValue);
   }
 
-  if (evt.target.matches('.scale__control--bigger') && scaleValue < maxScaleRange) {
-    scaleValue += scaleStep;
+  if (evt.target.matches('.scale__control--bigger') && scaleValue < MAX_SCALE_RANGE) {
+    scaleValue += SCALE_STEP;
     return getScaleValue(scaleValue);
   }
 };

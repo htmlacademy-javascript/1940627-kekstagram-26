@@ -11,7 +11,7 @@ const socialCommentElement = bigPictureElement.querySelector('.social__comment')
 const bigPictureDescriptionElement = bigPictureElement.querySelector('.social__caption');
 const bigPictureCloseElement = bigPictureElement.querySelector('#picture-cancel');
 const commentsFragment = document.createDocumentFragment();
-const maxCommentsValue = 5;
+const MAX_COMMENTS_VALUE = 5;
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -48,7 +48,7 @@ const createFullSizePicture = ({url, likes, comments, description}) => {
 
   //Функция отрисовки комментариев
   const showComment = () => {
-    comments.slice(0, commentsValue += maxCommentsValue).forEach(({avatar, name, message}) => {
+    comments.slice(0, commentsValue += MAX_COMMENTS_VALUE).forEach(({avatar, name, message}) => {
       const socialCommentElementTemplate = socialCommentElement.cloneNode(true);
       const socialCommentImage = socialCommentElementTemplate.querySelector('.social__picture');
       const socialCommentText = socialCommentElementTemplate.querySelector('.social__text');
