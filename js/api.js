@@ -1,4 +1,4 @@
-import { showAlert } from './util.js';
+import {showAlert} from './util.js';
 
 const getData = (onSuccess) => {
   fetch('https://26.javascript.pages.academy/kekstagram/data')
