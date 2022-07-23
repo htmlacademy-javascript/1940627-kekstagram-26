@@ -48,7 +48,8 @@ const createFullSizePicture = ({url, likes, comments, description}) => {
 
   //Функция отрисовки комментариев
   const showComment = () => {
-    comments.slice(0, commentsValue += MAX_COMMENTS_VALUE).forEach(({avatar, name, message}) => {
+    commentsValue += MAX_COMMENTS_VALUE;
+    comments.slice(0, commentsValue).forEach(({avatar, name, message}) => {
       const socialCommentElementTemplate = socialCommentElement.cloneNode(true);
       const socialCommentImage = socialCommentElementTemplate.querySelector('.social__picture');
       const socialCommentText = socialCommentElementTemplate.querySelector('.social__text');

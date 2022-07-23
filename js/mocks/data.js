@@ -50,6 +50,6 @@ const createPhotoDescriptions = () => ({
   comments: Array.from({length: getRandomInt(COMMENTS_RANGE[0], COMMENTS_RANGE[1])}, createComments)
 });
 
-const photoDescriptions = () => Array.from({length: PHOTO_COUNT}, createPhotoDescriptions);
+const getPhotoDescriptions = () => Array.from({length: PHOTO_COUNT}, createPhotoDescriptions);
 
-export {photoDescriptions};
+export {getPhotoDescriptions};
